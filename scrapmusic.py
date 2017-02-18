@@ -448,7 +448,7 @@ for movies in movie:
     """
     div = div + moviediv
 	
-    div += "<div class='image' data-src='images/movies/'"+str(count)+".jpg'"+"""
+    div += "<div class='image' data-src='images/movies/"+str(count)+".jpg'"+"""
 >
 												<a href="single.html">
 													<img src="images/1x1.png" alt="Image"/>

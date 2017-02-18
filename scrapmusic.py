@@ -444,11 +444,11 @@ for movies in movie:
         moviediv="""
 	<div class="col-xs-6 col-sm-4 col-md-15">
 	<div class="post boxoffice-style ms-style text-light">
-	<div class="image" data-src=
+	
     """
     div = div + moviediv
 	
-    div += "images/movies/"+str(count)+".jpg'"+"""
+    div += "<div class='image' data-src='images/movies/'"+str(count)+".jpg'"+"""
 >
 												<a href="single.html">
 													<img src="images/1x1.png" alt="Image"/>

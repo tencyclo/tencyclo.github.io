@@ -386,9 +386,9 @@ div = """
 
 					<div class="simple-tab-space ms-style text-light">
 						<div class="tab-title clearfix">
-							<a href="javascript:;" class="active">New Videos</a>
-							<a href="javascript:;">New Singles</a> 
-							<a href="javascript:;">Explore</a>
+							<a href="javascript:;" class="active">Page 1</a>
+							<a href="javascript:;">Page 2</a> 
+							<a href="javascript:;">Page 3</a>
 						</div>
 
 <div class="tab-panel">

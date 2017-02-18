@@ -428,7 +428,7 @@ for movies in movie:
          <div class="row row-has-5-columns">
     <div class="col-xs-6 col-sm-4 col-md-15">
     <div class="post boxoffice-style ms-style text-light">
-    <div class="image" data-src=
+    
     """
     elif count%10 ==6:
          moviediv="""
@@ -436,7 +436,7 @@ for movies in movie:
         <div class="row row-has-5-columns">
     <div class="col-xs-6 col-sm-4 col-md-15">
     <div class="post boxoffice-style ms-style text-light">
-    <div class="image" data-src=
+    
     """
     
     else: 

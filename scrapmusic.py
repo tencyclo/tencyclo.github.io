@@ -19,9 +19,11 @@ for movies in movie:
 img = nowshowing.find_all("img")
 count = 0
 for image in img:
-	count += 1
-	filename = str(count)+".jpg"
-	request.urlretrieve(str(image['src']), os.path.join("images/movies",filename))
+    if "blind-date" not in image['src']:
+        print(image['src'])
+        count += 1
+        filename = str(count)+".jpg"
+        request.urlretrieve(str(image['src']), os.path.join("images/movies",filename))
 
 
 div = """
@@ -400,98 +402,100 @@ moviediv = """
 browser = mechanicalsoup.Browser(soup_config={"features":"html.parser"})
 count = 0
 for movies in movie:
-    name = str(movies.getText()).rstrip() + " trailer"
-    words = name.replace(" ","+")
-    
-
-    url = "http://www.youtube.com/results?search_query=" +words 
-    page = browser.get(str(url))     
-    soup = BeautifulSoup(page.text)
-    divs = soup.find("div",{"class":"yt-lockup-dismissable yt-uix-tile"})
-    h3 = divs.find("h3",{"class":"yt-lockup-title "})
-    href = divs.find("a",{})
-    url = href['href']
-    count += 1
-
-    if count ==1:
-        moviediv="""
+    if "BLIND DATE" not in str(movies.getText()).rstrip()   :
+        print(str(movies.getText()).rstrip())
+        name = str(movies.getText()).rstrip() + " trailer"
+        words = name.replace(" ","+")
         
-         <div class="tab-content active">
-         <div class="row row-has-5-columns">
-    <div class="col-xs-6 col-sm-4 col-md-15">
-    <div class="post boxoffice-style ms-style text-light">
-    """
-    elif count%10 ==1:
-        moviediv="""
+
+        url = "http://www.youtube.com/results?search_query=" +words 
+        page = browser.get(str(url))     
+        soup = BeautifulSoup(page.text)
+        divs = soup.find("div",{"class":"yt-lockup-dismissable yt-uix-tile"})
+        h3 = divs.find("h3",{"class":"yt-lockup-title "})
+        href = divs.find("a",{})
+        url = href['href']
+        count += 1
+
+        if count ==1:
+            moviediv="""
+            
+             <div class="tab-content active">
+             <div class="row row-has-5-columns">
+        <div class="col-xs-6 col-sm-4 col-md-15">
+        <div class="post boxoffice-style ms-style text-light">
+        """
+        elif count%10 ==1:
+            moviediv="""
+            
+             <div class="tab-content ">
+             <div class="row row-has-5-columns">
+        <div class="col-xs-6 col-sm-4 col-md-15">
+        <div class="post boxoffice-style ms-style text-light">
         
-         <div class="tab-content ">
-         <div class="row row-has-5-columns">
-    <div class="col-xs-6 col-sm-4 col-md-15">
-    <div class="post boxoffice-style ms-style text-light">
-    
-    """
-    elif count%10 ==6:
-         moviediv="""
-         
-        <div class="row row-has-5-columns">
-    <div class="col-xs-6 col-sm-4 col-md-15">
-    <div class="post boxoffice-style ms-style text-light">
-    
-    """
-    
-    else: 
-        moviediv="""
-	<div class="col-xs-6 col-sm-4 col-md-15">
-	<div class="post boxoffice-style ms-style text-light">
-	
-    """
-    div = div + moviediv
-	
-    div += "<div class='image' data-src='images/movies/"+str(count)+".jpg'"+"""
->
-												<a href="single.html">
-													<img src="images/1x1.png" alt="Image"/>
-												</a>
-												<span class="label">Feb  </span>
-												<a href='
-                                                """
-
-   
-    
-    div += 'http://www.youtube.com'+url+"'"
-    div += """
-
-     class="play-button player-popup size-small">
-                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
-                                                        <g>
-                                                            <path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"></path>
-                                                            <path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"></path>
-                                                        </g>
-                                                    </svg>
-                                                </a>
-											</div>
-
-											<div class="ms-meta">
-	                                       <h4><a href="single.html">"""
-
-    div += movies.getText()
-    div +="""
-                                           </a></h4>
-												<h5><a href="single.html">Feb 2017</a></h5>
-												
-											</div>
-										</div>
-                                </div>  
-    """
-    if count%10 ==0 :
-        div += """ 
-        </div></div>
+        """
+        elif count%10 ==6:
+             moviediv="""
+             
+            <div class="row row-has-5-columns">
+        <div class="col-xs-6 col-sm-4 col-md-15">
+        <div class="post boxoffice-style ms-style text-light">
+        
         """
         
-    elif count%5==0:
+        else: 
+            moviediv="""
+    	<div class="col-xs-6 col-sm-4 col-md-15">
+    	<div class="post boxoffice-style ms-style text-light">
+    	
+        """
+        div = div + moviediv
+    	
+        div += "<div class='image' data-src='images/movies/"+str(count)+".jpg'"+"""
+    >
+    												<a href="single.html">
+    													<img src="images/1x1.png" alt="Image"/>
+    												</a>
+    												<span class="label">Feb  </span>
+    												<a href='
+                                                    """
+
+       
+        
+        div += 'http://www.youtube.com'+url+"'"
         div += """
-        </div>
+
+         class="play-button player-popup size-small">
+                                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
+                                                            <g>
+                                                                <path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"></path>
+                                                                <path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"></path>
+                                                            </g>
+                                                        </svg>
+                                                    </a>
+    											</div>
+
+    											<div class="ms-meta">
+    	                                       <h4><a href="single.html">"""
+
+        div += movies.getText()
+        div +="""
+                                               </a></h4>
+    												<h5><a href="single.html">Feb 2017</a></h5>
+    												
+    											</div>
+    										</div>
+                                    </div>  
         """
+        if count%10 ==0 :
+            div += """ 
+            </div></div>
+            """
+            
+        elif count%5==0:
+            div += """
+            </div>
+            """
 
     
 

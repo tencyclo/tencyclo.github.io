@@ -93,6 +93,17 @@ div = """
     
         
         }
+            @media screen and (max-width: 900px) {
+        h3{
+           font-size: 8vw !important; 
+           line-height: 8vw !important;
+        }
+        .fs-arrows > a{
+            
+            width: 12px  !important;
+  background-color: rgba(247, 1, 0, 0.7) !important;
+        }
+    }
 </style>
 
 </head>

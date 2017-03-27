@@ -5723,7 +5723,7 @@ blockquote:before {
 @media screen and (max-width: 1399px) {
   
   .fs-slide .fs-arrows:not(.arrows-bottom) {
-    display: none;
+    /*display: none;*/
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1199px) {

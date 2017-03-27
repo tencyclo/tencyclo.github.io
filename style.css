@@ -9189,6 +9189,7 @@ blockquote:before {
   -webkit-transition: all 0.25s ease;
   -moz-transition: all 0.25s ease;
   transition: all 0.25s ease;
+  
 }
 
 .fs-slide.ms-slide .fs-entry-item h3 span:hover::before {

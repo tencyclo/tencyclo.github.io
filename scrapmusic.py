@@ -628,7 +628,7 @@ div += """
 
 
 
-f = open("top-10-movies.html",'w')
+f = open("new-movies.html",'w')
 
 
 f.write(div)

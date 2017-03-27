@@ -5724,6 +5724,7 @@ blockquote:before {
   
   .fs-slide .fs-arrows:not(.arrows-bottom) {
     /*display: none;*/
+    font-size:  5px !important;
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1199px) {

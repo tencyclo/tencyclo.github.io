@@ -294,57 +294,89 @@ div = """
 		<div class="swiper-container">
 	    	<div class="swiper-wrapper">
 	    			    		<div class="swiper-slide">
-					<div class="fs-item" data-bg-color="#fff">
-						<div class="fs-entry-bg" data-bg-image="images/music/slider-1.jpg">
-							<a href="javascript:;" class="play-button">
-								<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
-									<g>
-										<path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"/>
-										<path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"/>
-									</g>
-								</svg>
-							</a>
-						</div>
-						<div class="container">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="fs-entry-item">
-										<h4 class="fs-title fs-animate-text">New Releases</h4>
-										<h3 class="fs-animate-text"><span>S7 Edge:</span> Samsung has released a new version of the Galaxy S7 EDGE – a 128GB model in the colour scheme “black pearl”</h3>
-										<a href="single.html" class="read-more fs-animate-text">read more</a>
-									</div>
+                    <div class="fs-item" data-bg-color="#fff">
+                        <div class="fs-entry-bg" data-bg-image="images/movies/slider-1.jpg">
+                            <a href='http://www.youtube.com/watch?v=lD8YsdRwP_0' class="play-button player-popup size-small">
 
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-					    		<div class="swiper-slide">
-					<div class="fs-item" data-bg-color="#fff">
-						<div class="fs-entry-bg" data-bg-image="images/music/slider-2.jpg">
-							<a href="javascript:;" class="play-button">
-								<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
-									<g>
-										<path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"/>
-										<path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"/>
-									</g>
-								</svg>
-							</a>
-						</div>
-						<div class="container">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="fs-entry-item">
-										<h4 class="fs-title fs-animate-text">New Releases</h4>
-										<h3 class="fs-animate-text"><span>S7 Edge:</span> Samsung has released a new version of the Galaxy S7 EDGE – a 128GB model in the colour scheme “black pearl”</h3>
-										<a href="single.html" class="read-more fs-animate-text">read more</a>
-									</div>
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
+                                    <g>
+                                        <path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"/>
+                                        <path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"/>
+                                    </g>
+                                </svg>
 
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                            </a>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fs-entry-item">
+                                        <h4 class="fs-title fs-animate-text"> October 2017</h4>
+                                        <h3 class="fs-animate-text"><span>2.0 :</span> Checkout Shankar's 2.0 starring Rajinikanth and Akshay Kumar</h3>
+                                        <a href="single.html" class="read-more fs-animate-text">read more</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="swiper-slide">
+                    <div class="fs-item" data-bg-color="#fff">
+                        <div class="fs-entry-bg" data-bg-image="images/movies/slider-2.jpg">
+                            <a href='https://www.youtube.com/watch?v=3cxixDgHUYw' class="play-button player-popup size-small">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
+                                    <g>
+
+                                        <path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"/>
+                                        <path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"/>
+                                    </g>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fs-entry-item">
+                                        <h4 class="fs-title fs-animate-text">November 2017</h4>
+                                        <h3 class="fs-animate-text"><span>Justice League :</span> <br> Watch <br> DC's <br> Superheroes unite!</h3>
+                                        <a href="single.html" class="read-more fs-animate-text">read more</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                        <div class="swiper-slide">
+                    <div class="fs-item" data-bg-color="#fff">
+                        <div class="fs-entry-bg" data-bg-image="images/movies/slider-3.jpg">
+                            <a href='https://www.youtube.com/watch?v=uisBaTkQAEs' class="play-button player-popup size-small">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
+                                    <g>
+
+                                        <path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"/>
+                                        <path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"/>
+                                    </g>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fs-entry-item">
+                                        <h4 class="fs-title fs-animate-text">April 2017</h4>
+                                        <h3 class="fs-animate-text"><span>Furious 8 :</span> <br> Watch the exquisite cars in Action</h3>
+                                        <a href="single.html" class="read-more fs-animate-text">read more</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 					    		<div class="swiper-slide">
 					<div class="fs-item" data-bg-color="#fff">
 						<div class="fs-entry-bg" data-bg-image="images/music/slider-3.jpg">
@@ -381,7 +413,7 @@ div = """
 	</div>
 
 	<!-- New Videos -->
-	<div class="section-full pv5 bg-cover bg-center-top" data-bg-image="images/music/box-bg.jpg">
+	<div class="section-full pv5 bg-cover bg-center-top" data-bg-image="images/home/box-bg.jpg">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">

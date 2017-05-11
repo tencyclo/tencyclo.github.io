@@ -630,7 +630,7 @@ for song,movie,links in hindi_music:
         if count == 1:
             moviediv="""
             
-             <div class="tab-content active">
+             <div class="tab-content ">
              <div class="row row-has-5-columns">
         <div class="col-xs-6 col-sm-4 col-md-15">
         <div class="post boxoffice-style ms-style text-light">

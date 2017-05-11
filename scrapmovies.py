@@ -6,113 +6,26 @@ from urllib import request
 # import urllib2
 import os
 
-import requests
-url = 'http://www.radiomirchi.com/more/mirchi-top-20/#t1'
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-result = requests.get(url, headers=headers)
-t = result.text
-# print(t.encode('utf-8'))
+browser = mechanicalsoup.Browser(soup_config={"features":"html.parser"})
+page = browser.get("http://www.spicinemas.in/chennai/now-showing")
+soup = BeautifulSoup(page.text,"html.parser")
 
-# import html.parser
-# html_parser = html.parser.HTMLParser()
-# unescaped = html_parser.unescape(t)
+nowshowing = soup.find("section",{"class":"movie__listing now-showing"})	
 
-# browser = mechanicalsoup.Browser(soup_config={"features":"html.parser"})
-# page = browser.get("http://www.radiomirchi.com/more/mirchi-top-20/#t1")
-soup = BeautifulSoup(result.content,"html.parser")
-# print(soup.encode('utf-8'))
-nowshowing = soup.find_all("div",{"class":"header"})	
-# print(nowshowing)
-song_name= []
-movie_name = []
-for songs in nowshowing:
-	song_name.append(songs.find("h2").getText())
-	movie_name.append(songs.find("h3").getText())	
+movie = nowshowing.find_all("dt")
+for movies in movie:
+	print(movies.getText())
+
+img = nowshowing.find_all("img")
+count = 0
+for image in img:
+    if "blind-date" not in image['src']:
+        print(image['src'])
+        count += 1
+        filename = str(count)+".jpg"
+        request.urlretrieve(str(image['src']), os.path.join("images/movies",filename))
 
 
-
-
-# for song,movie in music:
-# 	print(song," : " , movie)
-article = soup.find_all("article",{"class":"top01"})	
-links = []
-hindi_links = []
-i = 1
-for link in article:
-	div = link.find("div",{"class":"palyicon"})	
-	src = div.find("img")
-	embed = src['data-vid-src']
-	watch = embed.replace("embed/","watch?v=")
-	# hindi youtuube
-	hindi_links.append(watch)
-	print(watch)
-
-	div = link.find("div",{"class":"movieImg"})	
-	src = div.find("img")
-	img = src['src']
-	filename = str(i)+".jpg"
-	src = "http://www.radiomirchi.com/" + img
-	request.urlretrieve(str(src), os.path.join("images/musics/hindi",filename))
-	print(img)
-
-	if i==10:
-		break
-	i += 1
-hindi_music = zip(song_name,movie_name,hindi_links)
-
-
-url = 'http://www.radiomirchi.com/more/tamil-top-20/'
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-result = requests.get(url, headers=headers)
-t = result.text
-# print(t.encode('utf-8'))
-
-# import html.parser
-# html_parser = html.parser.HTMLParser()
-# unescaped = html_parser.unescape(t)
-
-# browser = mechanicalsoup.Browser(soup_config={"features":"html.parser"})
-# page = browser.get("http://www.radiomirchi.com/more/mirchi-top-20/#t1")
-soup = BeautifulSoup(result.content,"html.parser")
-# print(soup.encode('utf-8'))
-nowshowing = soup.find_all("div",{"class":"header"})	
-# print(nowshowing)
-song_name= []
-movie_name = []
-for songs in nowshowing:
-	song_name.append(songs.find("h2").getText())
-	movie_name.append(songs.find("h3").getText())	
-
-
-
-
-# for song,movie in music:
-# 	print(song," : " , movie)
-article = soup.find_all("article",{"class":"top01"})	
-links = []
-tamil_links = []
-i = 1
-for link in article:
-	div = link.find("div",{"class":"palyicon"})	
-	src = div.find("img")
-	embed = src['data-vid-src']
-	watch = embed.replace("embed/","watch?v=")
-	tamil_links.append(watch)
-	print(watch)
-
-	div = link.find("div",{"class":"movieImg"})	
-	src = div.find("img")
-	img = src['src']
-	filename = str(i)+".jpg"
-	src = "http://www.radiomirchi.com/" + img
-	request.urlretrieve(str(src), os.path.join("images/musics/tamil",filename))
-	print(img)
-
-	if i==10:
-		break
-	i += 1	
-
-tamil_music = zip(song_name,movie_name,tamil_links)
 div = """
 <!DOCTYPE html>
 <html lang="en">
@@ -420,23 +333,25 @@ div = """
             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                     <div class="fs-item" data-bg-color="#fff">
-                        <div class="fs-entry-bg" data-bg-image="images/musicc/slider-1.jpg">
-                            <!-- <a href="javascript:;" class="play-button">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
+                        <div class="fs-entry-bg" data-bg-image="images/movies/slider-1.jpg">
+                            <a href='http://www.youtube.com/watch?v=lD8YsdRwP_0' class="play-button player-popup size-small silde-button">
+                            <img src="images/svg/play-button-2.svg" class="svg">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" class="svg-desk" >
                                     <g>
                                         <path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"/>
                                         <path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"/>
                                     </g>
                                 </svg>
-                            </a> -->
+
+                            </a>
                         </div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="fs-entry-item">
-                                        <h4 class="fs-title fs-animate-text">New Releases</h4>
-                                        <h3 class="fs-animate-text"><span>That's What I Like:</span> Groove with Bruno Mars</h3>
-                                        <a href="#" class="read-more fs-animate-text">read more</a>
+                                        <h4 class="fs-title fs-animate-text"> October 2017</h4>
+                                        <h3 class="fs-animate-text"><span>2.0 :</span> Checkout Shankar's 2.0 starring Rajinikanth and Akshay Kumar</h3>
+                                        <a href="#movies" class="read-more fs-animate-text">read more</a>
                                     </div>
 
                                 </div>
@@ -446,23 +361,25 @@ div = """
                 </div>
                                 <div class="swiper-slide">
                     <div class="fs-item" data-bg-color="#fff">
-                        <div class="fs-entry-bg" data-bg-image="images/musicc/slider-2.jpg">
-                            <!-- <a href="javascript:;" class="play-button">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
+                        <div class="fs-entry-bg" data-bg-image="images/movies/slider-2.jpg">
+                            <a href='https://www.youtube.com/watch?v=3cxixDgHUYw' class="play-button player-popup size-small silde-button" >
+                            <img src="images/svg/play-button-2.svg" class="svg">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"  class="svg-desk">
                                     <g>
+
                                         <path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"/>
                                         <path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"/>
                                     </g>
                                 </svg>
-                            </a> -->
+                            </a>
                         </div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="fs-entry-item">
-                                        <h4 class="fs-title fs-animate-text">New Releases</h4>
-                                        <h3 class="fs-animate-text"><span>MARUVAARTHAI:</span><br>ARR's latest hit</h3>
-                                        <a href="#" class="read-more fs-animate-text">read more</a>
+                                        <h4 class="fs-title fs-animate-text">November 2017</h4>
+                                        <h3 class="fs-animate-text"><span>Justice League :</span> <br> Watch <br> DC's <br> Superheroes unite!</h3>
+                                        <a href="#movies" class="read-more fs-animate-text">read more</a>
                                     </div>
 
                                 </div>
@@ -470,25 +387,57 @@ div = """
                         </div>
                     </div>
                 </div>
+
+
+                        <div class="swiper-slide">
+                    <div class="fs-item" data-bg-color="#fff">
+                        <div class="fs-entry-bg" data-bg-image="images/movies/slider-3.jpg">
+                            <a href='https://www.youtube.com/watch?v=uisBaTkQAEs' class="play-button player-popup size-small silde-button">
+                            <img src="images/svg/play-button-2.svg" class="svg">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" class="svg-desk">
+                                    <g>
+
+                                        <path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"/>
+                                        <path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"/>
+                                    </g>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fs-entry-item">
+                                        <h4 class="fs-title fs-animate-text">April 2017</h4>
+                                        <h3 class="fs-animate-text"><span>Furious 8 :</span> <br> Watch the exquisite cars in Action</h3>
+                                        <a href="#movies" class="read-more fs-animate-text">read more</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                                 <div class="swiper-slide">
                     <div class="fs-item" data-bg-color="#fff">
-                        <div class="fs-entry-bg" data-bg-image="images/musicc/slider-3.jpg">
-                            <!-- <a href="javascript:;" class="play-button">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
+                        <div class="fs-entry-bg" data-bg-image="images/movies/slider-4.jpg">
+                            <a href='https://www.youtube.com/watch?v=qD-6d8Wo3do' class="play-button player-popup size-small silde-button">
+                            <img src="images/svg/play-button-2.svg" class="svg">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" class="svg-desk">
                                     <g>
                                         <path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"/>
                                         <path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"/>
                                     </g>
                                 </svg>
-                            </a> -->
+                            </a>
                         </div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="fs-entry-item">
-                                        <h4 class="fs-title fs-animate-text">New Releases</h4>
-                                        <h3 class="fs-animate-text"><span>MAANA KE HUM YAAR NAHIN:</span> The era of actors/singers</h3>
-                                        <a href="#" class="read-more fs-animate-text">read more</a>
+                                        <h4 class="fs-title fs-animate-text">April 2017</h4>
+                                        <h3 class="fs-animate-text"><span>Baahubali 2:</span>  The Conclusion <br>Why did Katappa kill Bahubali?</h3>
+                                        <a href="#movies" class="read-more fs-animate-text">read more</a>
                                     </div>
 
                                 </div>
@@ -496,10 +445,7 @@ div = """
                         </div>
                     </div>
                 </div>
-                    
-
                             </div>
-        
         </div>
 		
 		<div class="fs-arrows">
@@ -516,9 +462,9 @@ div = """
 
 					<div class="simple-tab-space ms-style text-light">
 						<div class="tab-title clearfix">
-							<a href="javascript:;" class="active">Tamil</a>
-							<a href="javascript:;">Hindi</a> 
-							<a href="javascript:;">English</a>
+							<a href="javascript:;" class="active">Page 1</a>
+							<a href="javascript:;">Page 2</a> 
+							<a href="javascript:;">Page 3</a>
 						</div>
 
 <div class="tab-panel">
@@ -527,14 +473,25 @@ div = """
 
 moviediv = """
 """
-
+browser = mechanicalsoup.Browser(soup_config={"features":"html.parser"})
 count = 0
-# for movies in movie:
-for song,movie,links in tamil_music:
-    	
+for movies in movie:
+    if "BLIND DATE" not in str(movies.getText()).rstrip()   :
+        print(str(movies.getText()).rstrip())
+        name = str(movies.getText()).rstrip() + " trailer"
+        words = name.replace(" ","+")
+        
+
+        url = "http://www.youtube.com/results?search_query=" +words 
+        page = browser.get(str(url))     
+        soup = BeautifulSoup(page.text,"html.parser")
+        divs = soup.find("div",{"class":"yt-lockup-dismissable yt-uix-tile"})
+        h3 = divs.find("h3",{"class":"yt-lockup-title "})
+        href = divs.find("a",{})
+        url = href['href']
         count += 1
 
-        if count == 1:
+        if count ==1:
             moviediv="""
             
              <div class="tab-content active">
@@ -542,17 +499,17 @@ for song,movie,links in tamil_music:
         <div class="col-xs-6 col-sm-4 col-md-15">
         <div class="post boxoffice-style ms-style text-light">
         """
-        # elif count%10 ==1:
-        #     moviediv="""
+        elif count%10 ==1:
+            moviediv="""
             
-        #      <div class="tab-content ">
-        #      <div class="row row-has-5-columns">
-        # <div class="col-xs-6 col-sm-4 col-md-15">
-        # <div class="post boxoffice-style ms-style text-light">
+             <div class="tab-content ">
+             <div class="row row-has-5-columns">
+        <div class="col-xs-6 col-sm-4 col-md-15">
+        <div class="post boxoffice-style ms-style text-light">
         
-        # """
-        elif count == 6 :
-             moviediv ="""
+        """
+        elif count%10 ==6:
+             moviediv="""
              
             <div class="row row-has-5-columns">
         <div class="col-xs-6 col-sm-4 col-md-15">
@@ -568,9 +525,9 @@ for song,movie,links in tamil_music:
         """
         div = div + moviediv
     	
-        div += "<div class='image' data-src='images/musics/tamil/"+str(count)+".jpg'"+"""
+        div += "<div class='image' data-src='images/movies/"+str(count)+".jpg'"+"""
     >
-    												<a href="#">
+    												<a href="single.html">
     													<img src="images/1x1.png" alt="Image"/>
     												</a>
     												<span class="label">May  </span>
@@ -579,7 +536,7 @@ for song,movie,links in tamil_music:
 
        
         
-        div += links+"'"
+        div += 'http://www.youtube.com'+url+"'"
         div += """
 
          class="play-button player-popup size-small">
@@ -593,125 +550,32 @@ for song,movie,links in tamil_music:
     											</div>
 
     											<div class="ms-meta">
-    	                                       <h4><a href="#">"""
+    	                                       <h4><a href="single.html">"""
 
-        div += song
+        div += movies.getText()
         div +="""
                                                </a></h4>
-    												<h5><a href="#">"""+movie+ """</a></h5>
+    												<h5><a href="single.html">May 2017</a></h5>
     												
     											</div>
     										</div>
                                     </div>  
         """
-        # if count%10 ==0 :
-        #     div += """ 
-        #     </div></div>
-        #     """
+        if count%10 ==0 :
+            div += """ 
+            </div></div>
+            """
             
-        if count%5==0:
+        elif count%5==0:
             div += """
             </div>
             """
 
-div += """</div>"""    
-
-
-# hindi
-moviediv = """
-"""
-
-count = 0
-# for movies in movie:
-for song,movie,links in hindi_music:
-    	
-        count += 1
-
-        if count == 1:
-            moviediv="""
-            
-             <div class="tab-content active">
-             <div class="row row-has-5-columns">
-        <div class="col-xs-6 col-sm-4 col-md-15">
-        <div class="post boxoffice-style ms-style text-light">
-        """
-        # elif count%10 ==1:
-        #     moviediv="""
-            
-        #      <div class="tab-content ">
-        #      <div class="row row-has-5-columns">
-        # <div class="col-xs-6 col-sm-4 col-md-15">
-        # <div class="post boxoffice-style ms-style text-light">
-        
-        # """
-        elif count == 6 :
-             moviediv ="""
-             
-            <div class="row row-has-5-columns">
-        <div class="col-xs-6 col-sm-4 col-md-15">
-        <div class="post boxoffice-style ms-style text-light">
-        
-        """
-        
-        else: 
-            moviediv="""
-    	<div class="col-xs-6 col-sm-4 col-md-15">
-    	<div class="post boxoffice-style ms-style text-light">
-    	
-        """
-        div = div + moviediv
-    	
-        div += "<div class='image' data-src='images/musics/hindi/"+str(count)+".jpg'"+"""
-    >
-    												<a href="#">
-    													<img src="images/1x1.png" alt="Image"/>
-    												</a>
-    												<span class="label">May  </span>
-    												<a href='
-                                                    """
-
-       
-        
-        div += links+"'"
-        div += """
-
-         class="play-button player-popup size-small">
-                                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
-                                                            <g>
-                                                                <path d="M16,0C7.2,0,0,7.2,0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16C32,7.2,24.8,0,16,0z M16,30.9C7.8,30.9,1.1,24.2,1.1,16C1.1,7.8,7.8,1.1,16,1.1c8.2,0,14.9,6.7,14.9,14.9C30.9,24.2,24.2,30.9,16,30.9z"></path>
-                                                                <path d="M22.2,15.9l-8.7-5.9c-0.1-0.1-0.2-0.1-0.3,0c-0.1,0.1-0.2,0.2-0.2,0.3v11.8c0,0.1,0.1,0.2,0.2,0.3c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2-0.1l8.7-5.9c0.1-0.1,0.1-0.1,0.1-0.2C22.4,16.1,22.3,16,22.2,15.9z"></path>
-                                                            </g>
-                                                        </svg>
-                                                    </a>
-    											</div>
-
-    											<div class="ms-meta">
-    	                                       <h4><a href="#">"""
-
-        div += song
-        div +="""
-                                               </a></h4>
-    												<h5><a href="#">"""+movie+ """</a></h5>
-    												
-    											</div>
-    										</div>
-                                    </div>  
-        """
-        # if count%10 ==0 :
-        #     div += """ 
-        #     </div></div>
-        #     """
-            
-        if count%5==0:
-            div += """
-            </div>
-            """
-
-div += """</div></div>""" 
+    
 
 
 div += """                            
-</div>
+
 </div>
 
 </div>
@@ -838,7 +702,7 @@ div += """
 
 
 
-f = open("top-10-songs.html",'w')
+f = open("new-movies.html",'w')
 
 
 f.write(div)
